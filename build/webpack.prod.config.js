@@ -17,9 +17,53 @@ module.exports = merge(baseConfig, {
         filename: 'static/js/[name].[contenthash].js',
         chunkFilename: 'tatic/js/chunk/[name].[contenthash].js'
     },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                include: [resolve('node_modules')],
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'cache-loader',
+                        options: {
+                            cacheDirectory: resolve('.cache-loader')
+                        }
+                    },
+                    'css-loader',
+                    'postcss-loader'
+                ],
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'cache-loader',
+                        options: {
+                            cacheDirectory: resolve('.cache-loader')
+                        }
+                    },
+                    'css-loader',
+                    'postcss-loader',
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            lessOptions: {
+                                javascriptEnabled: true,
+                                modifyVars: {   //参考链接：git@github.com:YDJ-FE/ts-react-webpack.git
+                                    'primary-color': '#1DA57A'
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './template/index.html',
+            template: './build/template/index.html',
             filename: 'index.html',
             inject: true,
             minify: {   //生产环境下会默认设置为true
