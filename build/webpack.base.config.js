@@ -33,7 +33,12 @@ const baseConfig = {
                         }
                     },
                     'thread-loader',
-                    'ts-loader'
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            happyPackMode: true
+                        }
+                    }
                 ],
                 exclude: /node_modules/,
             },
@@ -100,7 +105,7 @@ const baseConfig = {
             },
             eslint: {
                 enabled: true,
-                files: resolve('src/**/*.{ts, tsx}')
+                files: resolve('src/**/*.{ts,tsx}')
             }
         }),
         new CleanWebpackPlugin()

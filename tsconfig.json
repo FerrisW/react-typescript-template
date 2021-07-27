@@ -11,5 +11,6 @@
         "moduleResolution": "node",
         "declaration": false,
         "sourceMap": true,
-    }
+    },
+    "include": ["./src"]
 }
