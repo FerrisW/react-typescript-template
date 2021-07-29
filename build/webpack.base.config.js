@@ -4,6 +4,7 @@ const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
 const constants = require('./constants');
 const { resolve } = require('./utils');
@@ -108,7 +109,8 @@ const baseConfig = {
                 files: resolve('src/**/*.{ts,tsx}')
             }
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new WebpackManifestPlugin()
     ]
 }
 
